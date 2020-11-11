@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ioos_qc package &#8212; ioos_qc 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
@@ -39,13 +40,13 @@
 </div>
 <div class="section" id="module-ioos_qc.config">
 <span id="ioos-qc-config-module"></span><h2>ioos_qc.config module<a class="headerlink" href="#module-ioos_qc.config" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="ioos_qc.config.NcQcConfig">
-<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config.</code><code class="sig-name descname">NcQcConfig</code><span class="sig-paren">(</span><em class="sig-param">path_or_dict</em>, <em class="sig-param">tinp='time'</em>, <em class="sig-param">zinp='z'</em>, <em class="sig-param">lon='longitude'</em>, <em class="sig-param">lat='latitude'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config.</code><code class="sig-name descname">NcQcConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_dict</span></em>, <em class="sig-param"><span class="n">tinp</span><span class="o">=</span><span class="default_value">'time'</span></em>, <em class="sig-param"><span class="n">zinp</span><span class="o">=</span><span class="default_value">'z'</span></em>, <em class="sig-param"><span class="n">lon</span><span class="o">=</span><span class="default_value">'longitude'</span></em>, <em class="sig-param"><span class="n">lat</span><span class="o">=</span><span class="default_value">'latitude'</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#ioos_qc.config.QcConfig" title="ioos_qc.config.QcConfig"><code class="xref py py-class docutils literal notranslate"><span class="pre">ioos_qc.config.QcConfig</span></code></a></p>
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.config.NcQcConfig.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">path_or_ncd</em>, <em class="sig-param">**passedkwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_ncd</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">passedkwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs the tests that are defined in the config object.
 Returns a dictionary of the results as defined by the config</p>
 <dl class="field-list simple">
@@ -55,9 +56,9 @@ Returns a dictionary of the results as defined by the config</p>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.config.NcQcConfig.save_to_netcdf">
-<code class="sig-name descname">save_to_netcdf</code><span class="sig-paren">(</span><em class="sig-param">path_or_ncd</em>, <em class="sig-param">results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig.save_to_netcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig.save_to_netcdf" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">save_to_netcdf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_ncd</span></em>, <em class="sig-param"><span class="n">results</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#NcQcConfig.save_to_netcdf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.NcQcConfig.save_to_netcdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the given netcdf with test configuration and results.
 If there is already a variable for a given test, it will update that variable with the latest results.
 Otherwise, it will create a new variable.</p>
@@ -73,13 +74,13 @@ Otherwise, it will create a new variable.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="ioos_qc.config.QcConfig">
-<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config.</code><code class="sig-name descname">QcConfig</code><span class="sig-paren">(</span><em class="sig-param">path_or_dict</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#QcConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.QcConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config.</code><code class="sig-name descname">QcConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#QcConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.QcConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.config.QcConfig.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param">**passedkwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#QcConfig.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.QcConfig.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">passedkwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config.html#QcConfig.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config.QcConfig.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs the tests that are defined in the config object.</p>
 <p>Your input arguments should include whatever is necessary for the tests you want to run.
 For example: inp, tinp, lat, lon, etc.</p>
@@ -94,16 +95,63 @@ The leaves (test parameters) are replaced by the results of each test.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-ioos_qc.gliders">
-<span id="ioos-qc-gliders-module"></span><h2>ioos_qc.gliders module<a class="headerlink" href="#module-ioos_qc.gliders" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="ioos_qc.gliders.pressure_check">
-<code class="sig-prename descclassname">ioos_qc.gliders.</code><code class="sig-name descname">pressure_check</code><span class="sig-paren">(</span><em class="sig-param">inp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/gliders.html#pressure_check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.gliders.pressure_check" title="Permalink to this definition">¶</a></dt>
+<div class="section" id="module-ioos_qc.argo">
+<span id="ioos-qc-argo-module"></span><h2>ioos_qc.argo module<a class="headerlink" href="#module-ioos_qc.argo" title="Permalink to this headline">¶</a></h2>
+<p>Tests based on the ARGO QC manual.</p>
+<dl class="py function">
+<dt id="ioos_qc.argo.pressure_increasing_test">
+<code class="sig-prename descclassname">ioos_qc.argo.</code><code class="sig-name descname">pressure_increasing_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/argo.html#pressure_increasing_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.argo.pressure_increasing_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns an array of flag values where each input is flagged with SUSPECT if
 it does not monotonically increase</p>
+<p>Ref: ARGO QC Manual: 8. Pressure increasing test</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>inp</strong> (<em>numpy.ndarray</em>) – </p>
+<dd class="field-odd"><p><strong>inp</strong> – Pressure values as a numeric numpy array or a list of numbers.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A masked array of flag values equal in size to that of the input.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.argo.speed_test">
+<code class="sig-prename descclassname">ioos_qc.argo.</code><code class="sig-name descname">speed_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lon</span></em>, <em class="sig-param"><span class="n">lat</span></em>, <em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">suspect_threshold</span></em>, <em class="sig-param"><span class="n">fail_threshold</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/argo.html#speed_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.argo.speed_test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks that the calculated speed between two points is within reasonable bounds.</p>
+<dl class="simple">
+<dt>This test calculates a speed between subsequent points by</dt><dd><ul class="simple">
+<li><p>using latitude and longitude to calculate the distance between points</p></li>
+<li><p>calculating the time difference between those points</p></li>
+<li><p>checking if distance/time_diff exceeds the given threshold(s)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Missing and masked data is flagged as UNKNOWN.</p>
+<dl class="simple">
+<dt>If this test fails, it typically means that either a position or time is bad data,</dt><dd><p>or that a platform is mislabeled.</p>
+</dd>
+</dl>
+<p>Ref: ARGO QC Manual: 5. Impossible speed test</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lon</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code>]) – Longitudes as a numeric numpy array or a list of numbers.</p></li>
+<li><p><strong>lat</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code>]) – Latitudes as a numeric numpy array or a list of numbers.</p></li>
+<li><p><strong>tinp</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Real</span></code>]) – Time data as a sequence of datetime objects compatible with pandas DatetimeIndex.
+This includes numpy datetime64, python datetime objects and pandas Timestamp object.
+ie. pd.DatetimeIndex([datetime.utcnow(), np.datetime64(), pd.Timestamp.now()]
+If anything else is passed in the format is assumed to be seconds since the unix epoch.</p></li>
+<li><p><strong>suspect_threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – A float value representing a speed, in meters per second.
+Speeds exceeding this will be flagged as SUSPECT.</p></li>
+<li><p><strong>fail_threshold</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code>) – A float value representing a speed, in meters per second.
+Speeds exceeding this will be flagged as FAIL.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">MaskedArray</span></code></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A masked array of flag values equal in size to that of the input.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -111,9 +159,10 @@ it does not monotonically increase</p>
 </div>
 <div class="section" id="module-ioos_qc.qartod">
 <span id="ioos-qc-qartod-module"></span><h2>ioos_qc.qartod module<a class="headerlink" href="#module-ioos_qc.qartod" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<p>Tests based on the IOOS QARTOD manuals.</p>
+<dl class="py class">
 <dt id="ioos_qc.qartod.ClimatologyConfig">
-<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">ClimatologyConfig</code><span class="sig-paren">(</span><em class="sig-param">members=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">ClimatologyConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">members</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Objects to hold the config for a Climatology test</p>
 <dl class="field-list simple">
@@ -138,40 +187,40 @@ but can also be any attribute supported by a pandas Timestamp object.</p>
 </ul>
 </dd>
 </dl>
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.qartod.ClimatologyConfig.add">
-<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param">tspan</em>, <em class="sig-param">vspan</em>, <em class="sig-param">fspan=None</em>, <em class="sig-param">zspan=None</em>, <em class="sig-param">period=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.add" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tspan</span></em>, <em class="sig-param"><span class="n">vspan</span></em>, <em class="sig-param"><span class="n">fspan</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">zspan</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">period</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.add"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.add" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-odd"><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.qartod.ClimatologyConfig.check">
-<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param">tinp</em>, <em class="sig-param">inp</em>, <em class="sig-param">zinp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.check" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">zinp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.check"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.check" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.qartod.ClimatologyConfig.convert">
-<em class="property">static </em><code class="sig-name descname">convert</code><span class="sig-paren">(</span><em class="sig-param">config</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.convert" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="sig-name descname">convert</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.convert"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.convert" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.ClimatologyConfig.mem">
 <code class="sig-name descname">mem</code><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.mem" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">window</span></code></p>
 </dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.qartod.ClimatologyConfig.members">
 <em class="property">property </em><code class="sig-name descname">members</code><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.members" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.qartod.ClimatologyConfig.values">
-<code class="sig-name descname">values</code><span class="sig-paren">(</span><em class="sig-param">tind</em>, <em class="sig-param">zind=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.values" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">values</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">tind</span></em>, <em class="sig-param"><span class="n">zind</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#ClimatologyConfig.values"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.ClimatologyConfig.values" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>tind</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Timestamp</span></code>) – Value to test for inclusion between time bounds</p>
@@ -181,47 +230,47 @@ but can also be any attribute supported by a pandas Timestamp object.</p>
 
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.FLAGS">
 <code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">FLAGS</code><a class="headerlink" href="#ioos_qc.qartod.FLAGS" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <a class="reference internal" href="#ioos_qc.qartod.QartodFlags" title="ioos_qc.qartod.QartodFlags"><code class="xref py py-class docutils literal notranslate"><span class="pre">ioos_qc.qartod.QartodFlags</span></code></a></p>
 </dd></dl>
 
-<dl class="class">
+<dl class="py class">
 <dt id="ioos_qc.qartod.QartodFlags">
 <em class="property">class </em><code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">QartodFlags</code><a class="reference internal" href="../_modules/ioos_qc/qartod.html#QartodFlags"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.QartodFlags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Primary flags for QARTOD.</p>
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.QartodFlags.FAIL">
 <code class="sig-name descname">FAIL</code><em class="property"> = 4</em><a class="headerlink" href="#ioos_qc.qartod.QartodFlags.FAIL" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.QartodFlags.GOOD">
 <code class="sig-name descname">GOOD</code><em class="property"> = 1</em><a class="headerlink" href="#ioos_qc.qartod.QartodFlags.GOOD" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.QartodFlags.MISSING">
 <code class="sig-name descname">MISSING</code><em class="property"> = 9</em><a class="headerlink" href="#ioos_qc.qartod.QartodFlags.MISSING" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.QartodFlags.SUSPECT">
 <code class="sig-name descname">SUSPECT</code><em class="property"> = 3</em><a class="headerlink" href="#ioos_qc.qartod.QartodFlags.SUSPECT" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.QartodFlags.UNKNOWN">
 <code class="sig-name descname">UNKNOWN</code><em class="property"> = 2</em><a class="headerlink" href="#ioos_qc.qartod.QartodFlags.UNKNOWN" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.aggregate">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param">results</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.aggregate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">aggregate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">results</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#aggregate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs qartod_compare against all other qartod tests in results.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -230,9 +279,9 @@ but can also be any attribute supported by a pandas Timestamp object.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.attenuated_signal_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">attenuated_signal_test</code><span class="sig-paren">(</span><em class="sig-param">inp</em>, <em class="sig-param">tinp</em>, <em class="sig-param">suspect_threshold</em>, <em class="sig-param">fail_threshold</em>, <em class="sig-param">test_period=None</em>, <em class="sig-param">min_obs=None</em>, <em class="sig-param">min_period=None</em>, <em class="sig-param">check_type='std'</em>, <em class="sig-param">*args</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#attenuated_signal_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.attenuated_signal_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">attenuated_signal_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">suspect_threshold</span></em>, <em class="sig-param"><span class="n">fail_threshold</span></em>, <em class="sig-param"><span class="n">test_period</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_obs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">min_period</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">check_type</span><span class="o">=</span><span class="default_value">'std'</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#attenuated_signal_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.attenuated_signal_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for near-flat-line conditions using a range or standard deviation.</p>
 <p>Missing and masked data is flagged as UNKNOWN.</p>
 <dl class="field-list simple">
@@ -267,9 +316,9 @@ input data is flagged together.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.climatology_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">climatology_test</code><span class="sig-paren">(</span><em class="sig-param">config</em>, <em class="sig-param">inp</em>, <em class="sig-param">tinp</em>, <em class="sig-param">zinp</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#climatology_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.climatology_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">climatology_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">config</span></em>, <em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">zinp</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#climatology_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.climatology_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks that values are within reasonable range bounds and flags as SUSPECT.</p>
 <p>Data for which no ClimatologyConfig member exists is marked as UNKNOWN.</p>
 <dl class="field-list simple">
@@ -295,9 +344,9 @@ If anything else is passed in the format is assumed to be seconds since the unix
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.flat_line_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">flat_line_test</code><span class="sig-paren">(</span><em class="sig-param">inp</em>, <em class="sig-param">tinp</em>, <em class="sig-param">suspect_threshold</em>, <em class="sig-param">fail_threshold</em>, <em class="sig-param">tolerance=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#flat_line_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.flat_line_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">flat_line_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">suspect_threshold</span></em>, <em class="sig-param"><span class="n">fail_threshold</span></em>, <em class="sig-param"><span class="n">tolerance</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#flat_line_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.flat_line_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for consecutively repeated values within a tolerance.
 Missing and masked data is flagged as UNKNOWN.
 More information: <a class="reference external" href="https://github.com/ioos/ioos_qc/pull/11">https://github.com/ioos/ioos_qc/pull/11</a></p>
@@ -328,9 +377,9 @@ then the point is flagged.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.gross_range_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">gross_range_test</code><span class="sig-paren">(</span><em class="sig-param">inp</em>, <em class="sig-param">fail_span</em>, <em class="sig-param">suspect_span=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#gross_range_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.gross_range_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">gross_range_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">fail_span</span></em>, <em class="sig-param"><span class="n">suspect_span</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#gross_range_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.gross_range_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks that values are within reasonable range bounds.</p>
 <p>Given a 2-tuple of minimum/maximum values, flag data outside of the given
 range as FAIL data.  Optionally also flag data which falls outside of a user
@@ -352,9 +401,9 @@ defined range as SUSPECT. Missing and masked data is flagged as UNKNOWN.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.location_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">location_test</code><span class="sig-paren">(</span><em class="sig-param">lon</em>, <em class="sig-param">lat</em>, <em class="sig-param">bbox=(-180</em>, <em class="sig-param">-90</em>, <em class="sig-param">180</em>, <em class="sig-param">90)</em>, <em class="sig-param">range_max=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#location_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.location_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">location_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lon</span></em>, <em class="sig-param"><span class="n">lat</span></em>, <em class="sig-param"><span class="n">bbox</span><span class="o">=</span><span class="default_value">(- 180, - 90, 180, 90)</span></em>, <em class="sig-param"><span class="n">range_max</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#location_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.location_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks that a location is within reasonable bounds.</p>
 <p>Checks that longitude and latitude are within reasonable bounds defaulting
 to lon = [-180, 180] and lat = [-90, 90].  Optionally, check for a maximum
@@ -379,14 +428,9 @@ flagged as UNKNOWN.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
-<dt id="ioos_qc.qartod.mapdates">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">mapdates</code><span class="sig-paren">(</span><em class="sig-param">dates</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#mapdates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.mapdates" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.qartod_compare">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">qartod_compare</code><span class="sig-paren">(</span><em class="sig-param">vectors</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#qartod_compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.qartod_compare" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">qartod_compare</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">vectors</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#qartod_compare"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.qartod_compare" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aggregates an array of flags by precedence into a single array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -401,9 +445,9 @@ flagged as UNKNOWN.</p>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.rate_of_change_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">rate_of_change_test</code><span class="sig-paren">(</span><em class="sig-param">inp</em>, <em class="sig-param">tinp</em>, <em class="sig-param">threshold</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#rate_of_change_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.rate_of_change_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">rate_of_change_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">tinp</span></em>, <em class="sig-param"><span class="n">threshold</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#rate_of_change_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.rate_of_change_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks the first order difference of a series of values to see if
 there are any values exceeding a threshold defined by the inputs.
 These are then marked as SUSPECT.  It is up to the test operator
@@ -431,15 +475,15 @@ in observation units per second.</p></li>
 </dl>
 </dd></dl>
 
-<dl class="attribute">
+<dl class="py attribute">
 <dt id="ioos_qc.qartod.span">
 <code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">span</code><a class="headerlink" href="#ioos_qc.qartod.span" title="Permalink to this definition">¶</a></dt>
 <dd><p>alias of <code class="xref py py-class docutils literal notranslate"><span class="pre">ioos_qc.qartod.Span</span></code></p>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.qartod.spike_test">
-<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">spike_test</code><span class="sig-paren">(</span><em class="sig-param">inp</em>, <em class="sig-param">suspect_threshold</em>, <em class="sig-param">fail_threshold</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#spike_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.spike_test" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.qartod.</code><code class="sig-name descname">spike_test</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">inp</span></em>, <em class="sig-param"><span class="n">suspect_threshold</span></em>, <em class="sig-param"><span class="n">fail_threshold</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/qartod.html#spike_test"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.qartod.spike_test" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check for spikes by checking neighboring data against thresholds</p>
 <p>Determine if there is a spike at data point n-1 by subtracting
 the midpoint of n and n-2 and taking the absolute value of this
@@ -468,31 +512,31 @@ Missing and masked data is flagged as UNKNOWN.</p>
 </div>
 <div class="section" id="module-ioos_qc.utils">
 <span id="ioos-qc-utils-module"></span><h2>ioos_qc.utils module<a class="headerlink" href="#module-ioos_qc.utils" title="Permalink to this headline">¶</a></h2>
-<dl class="class">
+<dl class="py class">
 <dt id="ioos_qc.utils.GeoNumpyDateEncoder">
-<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">GeoNumpyDateEncoder</code><span class="sig-paren">(</span><em class="sig-param">skipkeys=False</em>, <em class="sig-param">ensure_ascii=True</em>, <em class="sig-param">check_circular=True</em>, <em class="sig-param">allow_nan=True</em>, <em class="sig-param">sort_keys=False</em>, <em class="sig-param">indent=None</em>, <em class="sig-param">separators=None</em>, <em class="sig-param">encoding='utf-8'</em>, <em class="sig-param">default=None</em>, <em class="sig-param">use_decimal=True</em>, <em class="sig-param">namedtuple_as_object=True</em>, <em class="sig-param">tuple_as_array=True</em>, <em class="sig-param">bigint_as_string=False</em>, <em class="sig-param">item_sort_key=None</em>, <em class="sig-param">for_json=False</em>, <em class="sig-param">ignore_nan=False</em>, <em class="sig-param">int_as_string_bitcount=None</em>, <em class="sig-param">iterable_as_array=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#GeoNumpyDateEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.GeoNumpyDateEncoder" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">GeoNumpyDateEncoder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">skipkeys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ensure_ascii</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">check_circular</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">allow_nan</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">sort_keys</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">indent</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">separators</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">encoding</span><span class="o">=</span><span class="default_value">'utf-8'</span></em>, <em class="sig-param"><span class="n">default</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_decimal</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">namedtuple_as_object</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tuple_as_array</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">bigint_as_string</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">item_sort_key</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">for_json</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ignore_nan</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">int_as_string_bitcount</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">iterable_as_array</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#GeoNumpyDateEncoder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.GeoNumpyDateEncoder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">geojson.codec.GeoJSONEncoder</span></code></p>
-<dl class="method">
+<dl class="py method">
 <dt id="ioos_qc.utils.GeoNumpyDateEncoder.default">
-<code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param">obj</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#GeoNumpyDateEncoder.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.GeoNumpyDateEncoder.default" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">default</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#GeoNumpyDateEncoder.default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.GeoNumpyDateEncoder.default" title="Permalink to this definition">¶</a></dt>
 <dd><p>If input object is an ndarray it will be converted into a list</p>
 </dd></dl>
 
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.utils.add_flag_metadata">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">add_flag_metadata</code><span class="sig-paren">(</span><em class="sig-param">standard_name</em>, <em class="sig-param">long_name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#add_flag_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.add_flag_metadata" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">add_flag_metadata</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">standard_name</span></em>, <em class="sig-param"><span class="n">long_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#add_flag_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.add_flag_metadata" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.utils.cf_safe_name">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">cf_safe_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#cf_safe_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.cf_safe_name" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">cf_safe_name</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#cf_safe_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.cf_safe_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.utils.check_timestamps">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">check_timestamps</code><span class="sig-paren">(</span><em class="sig-param">times</em>, <em class="sig-param">max_time_interval=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#check_timestamps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.check_timestamps" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">check_timestamps</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">times</span></em>, <em class="sig-param"><span class="n">max_time_interval</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#check_timestamps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.check_timestamps" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sanity checks for timestamp arrays</p>
 <p>Checks that the times supplied are in monotonically increasing
 chronological order, and optionally that time intervals between
@@ -511,14 +555,19 @@ value. [optional]</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.utils.dict_update">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">dict_update</code><span class="sig-paren">(</span><em class="sig-param">d</em>, <em class="sig-param">u</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#dict_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.dict_update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">dict_update</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">d</span></em>, <em class="sig-param"><span class="n">u</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#dict_update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.dict_update" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="function">
+<dl class="py function">
+<dt id="ioos_qc.utils.great_circle_distance">
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">great_circle_distance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lat_arr</span></em>, <em class="sig-param"><span class="n">lon_arr</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#great_circle_distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.great_circle_distance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
 <dt id="ioos_qc.utils.isfixedlength">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">isfixedlength</code><span class="sig-paren">(</span><em class="sig-param">lst</em>, <em class="sig-param">length</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#isfixedlength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.isfixedlength" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">isfixedlength</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lst</span></em>, <em class="sig-param"><span class="n">length</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#isfixedlength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.isfixedlength" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></p>
@@ -526,9 +575,14 @@ value. [optional]</p></li>
 </dl>
 </dd></dl>
 
-<dl class="function">
+<dl class="py function">
 <dt id="ioos_qc.utils.isnan">
-<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">isnan</code><span class="sig-paren">(</span><em class="sig-param">v</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#isnan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.isnan" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">isnan</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">v</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#isnan"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.isnan" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.utils.mapdates">
+<code class="sig-prename descclassname">ioos_qc.utils.</code><code class="sig-name descname">mapdates</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dates</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/utils.html#mapdates"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.utils.mapdates" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </div>
@@ -574,7 +628,7 @@ value. [optional]</p></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ioos_qc package</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ioos_qc.config">ioos_qc.config module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#module-ioos_qc.gliders">ioos_qc.gliders module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ioos_qc.argo">ioos_qc.argo module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ioos_qc.qartod">ioos_qc.qartod module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ioos_qc.utils">ioos_qc.utils module</a></li>
 </ul>
@@ -619,7 +673,7 @@ value. [optional]</p></li>
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

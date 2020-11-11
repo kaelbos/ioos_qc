@@ -2,8 +2,8 @@
 ./_images/examples_QartodTestExample_SalinityAttenuation_13_1.png
 ./_images/examples_QartodTestExample_SalinityAttenuation_7_1.png
 ./_modules/index.html
+./_modules/ioos_qc/argo.html
 ./_modules/ioos_qc/config.html
-./_modules/ioos_qc/gliders.html
 ./_modules/ioos_qc/qartod.html
 ./_modules/ioos_qc/utils.html
 ./_sources/api/ioos_qc.rst.txt
@@ -26,7 +26,7 @@
 ./_static/doctools.js
 ./_static/documentation_options.js
 ./_static/file.png
-./_static/jquery-3.4.1.js
+./_static/jquery-3.5.1.js
 ./_static/jquery.js
 ./_static/language_data.js
 ./_static/minus.png

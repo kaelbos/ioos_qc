@@ -1,12 +1,13 @@
 
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ioos_qc.qartod &#8212; ioos_qc 1.0.0 documentation</title>
-    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
@@ -34,6 +35,7 @@
   <h1>Source code for ioos_qc.qartod</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># coding=utf-8</span>
+<span class="sd">&quot;&quot;&quot;Tests based on the IOOS QARTOD manuals.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
@@ -42,12 +44,12 @@
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">pygc</span> <span class="kn">import</span> <span class="n">great_distance</span>
+
 
 <span class="kn">from</span> <span class="nn">ioos_qc.utils</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">isnan</span><span class="p">,</span>
     <span class="n">isfixedlength</span><span class="p">,</span>
-    <span class="n">add_flag_metadata</span>
+    <span class="n">add_flag_metadata</span><span class="p">,</span> <span class="n">great_circle_distance</span><span class="p">,</span> <span class="n">mapdates</span>
 <span class="p">)</span>
 
 <span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># noqa</span>
@@ -67,19 +69,6 @@
 <span class="n">NOTEVAL_VALUE</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">UNKNOWN</span>
 
 <span class="n">span</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Span&#39;</span><span class="p">,</span> <span class="s1">&#39;minv maxv&#39;</span><span class="p">)</span>
-
-
-<div class="viewcode-block" id="mapdates"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.qartod.mapdates">[docs]</a><span class="k">def</span> <span class="nf">mapdates</span><span class="p">(</span><span class="n">dates</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
-        <span class="c1"># numpy datetime objects</span>
-        <span class="k">return</span> <span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Finally try unix epoch seconds</span>
-            <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="c1"># strings work here but we don&#39;t advertise that</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="aggregate"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.qartod.aggregate">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="s1">&#39;aggregate_quality_flag&#39;</span><span class="p">,</span> <span class="s1">&#39;Aggregate Quality Flag&#39;</span><span class="p">)</span>
@@ -186,13 +175,7 @@
     <span class="k">if</span> <span class="n">range_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">lon</span><span class="o">.</span><span class="n">size</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="c1"># Calculating the great_distance between each point</span>
         <span class="c1"># Flag suspect any distance over range_max</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">lon</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-        <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">great_distance</span><span class="p">(</span>
-            <span class="n">start_latitude</span><span class="o">=</span><span class="n">lat</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">end_latitude</span><span class="o">=</span><span class="n">lat</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
-            <span class="n">start_longitude</span><span class="o">=</span><span class="n">lon</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
-            <span class="n">end_longitude</span><span class="o">=</span><span class="n">lon</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-        <span class="p">)[</span><span class="s1">&#39;distance&#39;</span><span class="p">]</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">great_circle_distance</span><span class="p">(</span><span class="n">lat</span><span class="p">,</span> <span class="n">lon</span><span class="p">)</span>
         <span class="n">flag_arr</span><span class="p">[</span><span class="n">d</span> <span class="o">&gt;</span> <span class="n">range_max</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">SUSPECT</span>
 
     <span class="c1"># Ignore warnings when comparing NaN values even though they are masked</span>
@@ -857,7 +840,7 @@
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.4.4</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
