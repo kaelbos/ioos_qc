@@ -13,7 +13,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -35,26 +34,134 @@
   <h1>Source code for ioos_qc.utils</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># coding=utf-8</span>
-<span class="kn">import</span> <span class="nn">geojson</span>
+<span class="kn">import</span> <span class="nn">io</span>
 <span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">date</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">simplejson</span> <span class="k">as</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Union</span>
 <span class="kn">from</span> <span class="nn">numbers</span> <span class="kn">import</span> <span class="n">Real</span>
 <span class="kn">from</span> <span class="nn">pyproj</span> <span class="kn">import</span> <span class="n">Geod</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">odict</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xarray</span> <span class="k">as</span> <span class="nn">xr</span>
+<span class="kn">import</span> <span class="nn">geojson</span>
+<span class="kn">from</span> <span class="nn">ruamel.yaml</span> <span class="kn">import</span> <span class="n">YAML</span>
 
 <span class="n">N</span> <span class="o">=</span> <span class="n">Real</span>
 <span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
 
-<div class="viewcode-block" id="add_flag_metadata"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.add_flag_metadata">[docs]</a><span class="k">def</span> <span class="nf">add_flag_metadata</span><span class="p">(</span><span class="n">standard_name</span><span class="p">,</span> <span class="n">long_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">dec</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-        <span class="n">fn</span><span class="o">.</span><span class="n">standard_name</span> <span class="o">=</span> <span class="n">standard_name</span>
-        <span class="n">fn</span><span class="o">.</span><span class="n">long_name</span> <span class="o">=</span> <span class="n">long_name</span>
-        <span class="k">return</span> <span class="n">fn</span>
-    <span class="k">return</span> <span class="n">dec</span></div>
+<div class="viewcode-block" id="add_flag_metadata"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.add_flag_metadata">[docs]</a><span class="k">def</span> <span class="nf">add_flag_metadata</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="n">func</span> <span class="p">:</span> <span class="n">callable</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="openf"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.openf">[docs]</a><span class="k">def</span> <span class="nf">openf</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Helper to allow one-line-lambdas to read file contents</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="load_config_from_xarray"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.load_config_from_xarray">[docs]</a><span class="k">def</span> <span class="nf">load_config_from_xarray</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Load an xarray dataset as a config dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">to_close</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">decode_cf</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">to_close</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="c1"># If a global attribute exists, load as a YAML or JSON string and</span>
+    <span class="c1"># ignore any config at the variable level</span>
+    <span class="k">if</span> <span class="s1">&#39;ioos_qc_config&#39;</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
+        <span class="n">L</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Using global attribute ioos_qc_config for QC config&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">load_config_as_dict</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;ioos_qc_config&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Iterate over variables and construct a config object</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">odict</span><span class="p">()</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">filter_by_attrs</span><span class="p">(</span>
+        <span class="n">ioos_qc_module</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ioos_qc_test</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ioos_qc_config</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">ioos_qc_target</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">variables</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dv</span> <span class="ow">in</span> <span class="n">source</span><span class="o">.</span><span class="n">dims</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">vobj</span> <span class="o">=</span> <span class="n">source</span><span class="p">[</span><span class="n">dv</span><span class="p">]</span>
+
+        <span class="c1"># Because a data variables can have more than one check</span>
+        <span class="c1"># associated with it we need to merge any existing configs</span>
+        <span class="c1"># for this variable</span>
+        <span class="n">newdict</span> <span class="o">=</span> <span class="n">odict</span><span class="p">({</span>
+            <span class="n">vobj</span><span class="o">.</span><span class="n">ioos_qc_module</span><span class="p">:</span> <span class="n">odict</span><span class="p">({</span>
+                <span class="n">vobj</span><span class="o">.</span><span class="n">ioos_qc_test</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">vobj</span><span class="o">.</span><span class="n">ioos_qc_config</span><span class="p">))</span>
+            <span class="p">})</span>
+        <span class="p">})</span>
+        <span class="n">merged</span> <span class="o">=</span> <span class="n">dict_update</span><span class="p">(</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">vobj</span><span class="o">.</span><span class="n">ioos_qc_target</span><span class="p">,</span> <span class="p">{}),</span>
+            <span class="n">newdict</span>
+        <span class="p">)</span>
+        <span class="n">y</span><span class="p">[</span><span class="n">vobj</span><span class="o">.</span><span class="n">ioos_qc_target</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span>
+
+    <span class="c1"># If we opened this xarray dataset from a file we should close it</span>
+    <span class="k">if</span> <span class="n">to_close</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">y</span></div>
+
+
+<div class="viewcode-block" id="load_config_as_dict"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.load_config_as_dict">[docs]</a><span class="k">def</span> <span class="nf">load_config_as_dict</span><span class="p">(</span><span class="n">source</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">odict</span><span class="p">,</span> <span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">]</span>
+                        <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">odict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Load an object as a config dict. The source can be a dict, odict,</span>
+<span class="sd">    YAML string, JSON string, a StringIO, or a file path to a valid YAML or JSON file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">(</span><span class="n">typ</span><span class="o">=</span><span class="s1">&#39;safe&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">odict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">source</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">odict</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">Dataset</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">load_config_from_xarray</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">)):</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+
+        <span class="c1"># Try to load as YAML, then JSON, then file path</span>
+        <span class="n">load_funcs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">load_config_from_xarray</span><span class="p">(</span><span class="n">x</span><span class="p">),</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">openf</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span>  <span class="c1"># noqa</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">openf</span><span class="p">(</span><span class="n">x</span><span class="p">))),</span>  <span class="c1"># noqa</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">lf</span> <span class="ow">in</span> <span class="n">load_funcs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">lf</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">):</span>
+        <span class="c1"># Try to load as YAML, then JSON, then file path</span>
+        <span class="n">load_funcs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+            <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">odict</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span>
+        <span class="p">]</span>
+        <span class="k">for</span> <span class="n">lf</span> <span class="ow">in</span> <span class="n">load_funcs</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">lf</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">getvalue</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">BaseException</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Config source is not valid!&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="isfixedlength"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.isfixedlength">[docs]</a><span class="k">def</span> <span class="nf">isfixedlength</span><span class="p">(</span><span class="n">lst</span> <span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">],</span>
@@ -75,7 +182,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="isnan"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.isnan">[docs]</a><span class="k">def</span> <span class="nf">isnan</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+<div class="viewcode-block" id="isnan"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.isnan">[docs]</a><span class="k">def</span> <span class="nf">isnan</span><span class="p">(</span><span class="n">v</span> <span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="n">v</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span>
         <span class="n">v</span> <span class="ow">is</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="ow">or</span>
@@ -84,7 +191,10 @@
 
 
 <div class="viewcode-block" id="mapdates"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.mapdates">[docs]</a><span class="k">def</span> <span class="nf">mapdates</span><span class="p">(</span><span class="n">dates</span><span class="p">):</span>
-    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="s1">&#39;tz&#39;</span><span class="p">):</span>
+        <span class="c1"># pandas time objects with a datetime component, remove the timezone</span>
+        <span class="k">return</span> <span class="n">dates</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">tz_localize</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">dates</span><span class="p">,</span> <span class="s1">&#39;dtype&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">dates</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">datetime64</span><span class="p">):</span>
         <span class="c1"># numpy datetime objects</span>
         <span class="k">return</span> <span class="n">dates</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;datetime64[ns]&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -97,7 +207,8 @@
 
 
 <div class="viewcode-block" id="check_timestamps"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.check_timestamps">[docs]</a><span class="k">def</span> <span class="nf">check_timestamps</span><span class="p">(</span><span class="n">times</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-                     <span class="n">max_time_interval</span> <span class="p">:</span> <span class="n">N</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+                     <span class="n">max_time_interval</span> <span class="p">:</span> <span class="n">N</span> <span class="o">=</span> <span class="kc">None</span>
+                     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Sanity checks for timestamp arrays</span>
 
 <span class="sd">    Checks that the times supplied are in monotonically increasing</span>
@@ -128,9 +239,8 @@
         <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="dict_update"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.dict_update">[docs]</a><span class="k">def</span> <span class="nf">dict_update</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+<div class="viewcode-block" id="dict_update"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.dict_update">[docs]</a><span class="k">def</span> <span class="nf">dict_update</span><span class="p">(</span><span class="n">d</span> <span class="p">:</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">u</span> <span class="p">:</span> <span class="n">Mapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">:</span>
     <span class="c1"># http://stackoverflow.com/a/3233356</span>
-    <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">u</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">):</span>
@@ -139,11 +249,20 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">d</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="p">{</span> <span class="n">k</span><span class="p">:</span> <span class="n">u</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="p">}</span>
     <span class="k">return</span> <span class="n">d</span></div>
 
 
-<div class="viewcode-block" id="cf_safe_name"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.cf_safe_name">[docs]</a><span class="k">def</span> <span class="nf">cf_safe_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<div class="viewcode-block" id="dict_depth"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.dict_depth">[docs]</a><span class="k">def</span> <span class="nf">dict_depth</span><span class="p">(</span><span class="n">d</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Get the depth of a dict</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># https://stackoverflow.com/a/23499101</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">dict_depth</span><span class="p">,</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span> <span class="k">if</span> <span class="n">d</span> <span class="k">else</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="cf_safe_name"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.cf_safe_name">[docs]</a><span class="k">def</span> <span class="nf">cf_safe_name</span><span class="p">(</span><span class="n">name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">re</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^[0-9_]&#39;</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
@@ -156,7 +275,7 @@
 
 <div class="viewcode-block" id="GeoNumpyDateEncoder"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.GeoNumpyDateEncoder">[docs]</a><span class="k">class</span> <span class="nc">GeoNumpyDateEncoder</span><span class="p">(</span><span class="n">geojson</span><span class="o">.</span><span class="n">GeoJSONEncoder</span><span class="p">):</span>
 
-<div class="viewcode-block" id="GeoNumpyDateEncoder.default"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.GeoNumpyDateEncoder.default">[docs]</a>    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+<div class="viewcode-block" id="GeoNumpyDateEncoder.default"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.utils.GeoNumpyDateEncoder.default">[docs]</a>    <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;If input object is an ndarray it will be converted into a list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -253,7 +372,7 @@
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

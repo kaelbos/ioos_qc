@@ -13,7 +13,6 @@
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
     <script src="../../_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -51,7 +50,8 @@
 <span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
 
-<div class="viewcode-block" id="pressure_increasing_test"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.argo.pressure_increasing_test">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="s1">&#39;pressure_increasing_test_quality_flag&#39;</span><span class="p">,</span> <span class="s1">&#39;Pressure Increasing Test Quality Flag&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="pressure_increasing_test"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.argo.pressure_increasing_test">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="n">stanard_name</span><span class="o">=</span><span class="s1">&#39;pressure_increasing_test_quality_flag&#39;</span><span class="p">,</span>
+                   <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;Pressure Increasing Test Quality Flag&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">pressure_increasing_test</span><span class="p">(</span><span class="n">inp</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns an array of flag values where each input is flagged with SUSPECT if</span>
@@ -78,7 +78,8 @@
     <span class="k">return</span> <span class="n">flags</span></div>
 
 
-<div class="viewcode-block" id="speed_test"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.argo.speed_test">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="s1">&#39;speed_test_quality_flag&#39;</span><span class="p">,</span> <span class="s1">&#39;Speed Test Quality Flag&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="speed_test"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.argo.speed_test">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="n">standard_name</span><span class="o">=</span><span class="s1">&#39;speed_test_quality_flag&#39;</span><span class="p">,</span>
+                   <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;Speed Test Quality Flag&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">speed_test</span><span class="p">(</span><span class="n">lon</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
                <span class="n">lat</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
                <span class="n">tinp</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
@@ -93,7 +94,7 @@
 <span class="sd">      * checking if distance/time_diff exceeds the given threshold(s)</span>
 
 <span class="sd">    Missing and masked data is flagged as UNKNOWN.</span>
-<span class="sd">    </span>
+
 <span class="sd">    If this test fails, it typically means that either a position or time is bad data,</span>
 <span class="sd">     or that a platform is mislabeled.</span>
 
@@ -241,7 +242,7 @@
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

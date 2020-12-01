@@ -13,7 +13,6 @@
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/language_data.js"></script>
-    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Installation" href="installation.html" />
@@ -44,17 +43,33 @@ observing systems.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#manual">Manual</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#qcconfig">QcConfig</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#creation">Creation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#running">Running</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#results">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#basic-usage">Basic usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#concepts">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#configurations">Configurations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#streamconfig">StreamConfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#contextconfig">ContextConfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#config">Config</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#ncqcconfig">NcQcConfig</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#id1">Creation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#id2">Running</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#id3">Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#streams">Streams</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#results">Results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#numpystream">NumpyStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#pandasstream">PandasStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#netcdfstream">NetcdfStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#xarraystream">XarrayStream</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#stores">Stores</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#pandasstore">PandasStore</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#cfnetcdfstore">CFNetCDFStore</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#qcconfigcreator">QcConfigCreator</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#creatorconfig">CreatorConfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#id6">QcConfigCreator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#qcvariableconfig">QcVariableConfig</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#create-config-for-qcconfig">Create config for QcConfig</a></li>
 </ul>
 </li>
 </ul>
@@ -89,10 +104,19 @@ observing systems.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="api/modules.html">ioos_qc</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="api/ioos_qc.html">ioos_qc package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/ioos_qc.config_creator.html">ioos_qc.config_creator package</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#submodules">Submodules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.config">ioos_qc.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.argo">ioos_qc.argo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.config">ioos_qc.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.gliders">ioos_qc.gliders module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.plotting">ioos_qc.plotting module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.qartod">ioos_qc.qartod module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.results">ioos_qc.results module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.stores">ioos_qc.stores module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.streams">ioos_qc.streams module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.utils">ioos_qc.utils module</a></li>
 </ul>
 </li>
@@ -183,7 +207,7 @@ observing systems.</p>
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ioos_qc.config_creator package &#8212; ioos_qc 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="ioos_qc package" href="ioos_qc.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-ioos_qc.config_creator">
+<span id="ioos-qc-config-creator-package"></span><h1>ioos_qc.config_creator package<a class="headerlink" href="#module-ioos_qc.config_creator" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-ioos_qc.config_creator.config_creator">
+<span id="ioos-qc-config-creator-config-creator-module"></span><h2>ioos_qc.config_creator.config_creator module<a class="headerlink" href="#module-ioos_qc.config_creator.config_creator" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="ioos_qc.config_creator.config_creator.CreatorConfig">
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config_creator.config_creator.</code><code class="sig-name descname">CreatorConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_dict</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">{'definitions': {'dataset': {'properties': {'3d': {'description': 'Include if 3d dataset with value being the name of the 3rd dimension', 'type': 'string'}, 'file_path': {'description': 'Path to file used to create configuration.', 'type': 'string'}, 'name': {'description': 'Name of dataset', 'type': 'string'}, 'variables': {'description': 'Variables in file used to create configuration.', 'type': 'object'}}, 'required': ['name', 'file_path', 'variables'], 'title': 'Dataset description', 'type': 'object'}, 'variable': {'items': {'type': 'object'}, 'title': 'Variable map (variable name in QcConfig -&gt; variable name in dataset', 'type': 'object'}}, 'description': 'Schema to validate configuration for QcCreatorConfig', 'properties': {'datasets': {'description': 'Array of datasets used for QcCreatorConfig', 'items': {'$ref': '#/definitions/dataset'}, 'type': 'array'}}, 'required': ['datasets'], 'title': 'QcConfigCreator Schema', 'type': 'object'}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#CreatorConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.CreatorConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Defines the dataset(s) configuration used by QcConfigCreator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_or_dict</strong> – QcConfigCreator configuration, one of the following formats:
+python dict
+JSON filepath (str or Path object)</p></li>
+<li><p><strong>dict</strong> – JSON schema for CreatorConfig</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator">
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config_creator.config_creator.</code><code class="sig-name descname">QcConfigCreator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">creator_config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Creates level-0 configuration to create QcQonfig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>creator_config</strong> (<em>QcCreatorConfig</em>) – Configuration for datasets and variables used to create qc_config.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator.allowed_stats">
+<code class="sig-name descname">allowed_stats</code><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator.allowed_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specific statistics allowed to be used to configure each test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator.allowed_operators">
+<code class="sig-name descname">allowed_operators</code><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator.allowed_operators" title="Permalink to this definition">¶</a></dt>
+<dd><p>Operators allowed to used to configure each test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._create_test_section">
+<code class="sig-name descname">_create_test_section</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">test_name</span></em>, <em class="sig-param"><span class="n">variable_config</span></em>, <em class="sig-param"><span class="n">test_limits</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._create_test_section"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._create_test_section" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given test_name, QcVariableConfig and test_limits, return qc_config section for that test.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._determine_dataset_years">
+<code class="sig-name descname">_determine_dataset_years</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._determine_dataset_years"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._determine_dataset_years" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determine year used in datasets, return as dict {dataset_name, year}.</p>
+<div class="admonition-notes admonition">
+<p class="admonition-title">Notes</p>
+<ul class="simple">
+<li><p>Each dataset is from a unique climatology or source,
+so the monthly files have different years.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._get_stats">
+<code class="sig-name descname">_get_stats</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">variable_config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._get_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._get_stats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dict of stats (min, max, mean, std) for given config</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._get_subset">
+<code class="sig-name descname">_get_subset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">bbox</span></em>, <em class="sig-param"><span class="n">time_slice</span></em>, <em class="sig-param"><span class="n">depth</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">pad_delta</span><span class="o">=</span><span class="default_value">0.5</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._get_subset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._get_subset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get subset of data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._get_time_range">
+<code class="sig-name descname">_get_time_range</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em>, <em class="sig-param"><span class="n">time_range</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._get_time_range"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._get_time_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return time slice to query data from input time_range.</p>
+<p>Notes:
+- The source datasets have different times because they are from different climatologies.
+- This method extracts the dates, but corrects the year for the appropriate dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._load_datasets">
+<code class="sig-name descname">_load_datasets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._load_datasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._load_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load datasets</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator._var2var_in_file">
+<code class="sig-name descname">_var2var_in_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator._var2var_in_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator._var2var_in_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return variable name used in the dataset and dataset name</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator.create_config">
+<code class="sig-name descname">create_config</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">variable_config</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator.create_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator.create_config" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create QARTOD QC config given QcVariableConfig.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>variable_config</strong> (<a class="reference internal" href="#ioos_qc.config_creator.config_creator.QcVariableConfig" title="ioos_qc.config_creator.config_creator.QcVariableConfig"><em>QcVariableConfig</em></a>) – Config for variable to be quality controlled</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Config for ioos_qc</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>qc_config (dict)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcConfigCreator.var2dataset">
+<code class="sig-name descname">var2dataset</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">var</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcConfigCreator.var2dataset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcConfigCreator.var2dataset" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return dataset name and dataset for given variable (as named in qc_config, not in the file)</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="ioos_qc.config_creator.config_creator.QcVariableConfig">
+<em class="property">class </em><code class="sig-prename descclassname">ioos_qc.config_creator.config_creator.</code><code class="sig-name descname">QcVariableConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path_or_dict</span></em>, <em class="sig-param"><span class="n">schema</span><span class="o">=</span><span class="default_value">{'definitions': {'test': {'description': 'Test (gross_range_test, etc.) definition', 'properties': {'fail_max': {'description': 'Function or value to define fail max', 'type': 'string'}, 'fail_min': {'description': 'Function or value to define fail min', 'type': 'string'}, 'suspect_max': {'description': 'Function or value to define suspect max', 'type': 'string'}, 'suspect_min': {'description': 'Function or value to define suspect min', 'type': 'string'}}, 'required': ['suspect_min', 'suspect_max', 'fail_min', 'fail_max'], 'type': 'object'}}, 'description': 'Schema to validate configuration for QcVariableConfig', 'properties': {'bbox': {'description': 'Bounding box of region in deployment (xmin, ymin, xmax, ymax)', 'type': 'array'}, 'end_time': {'description': 'Exclusive end time of deployment (YYYY-MM-DD)', 'type': 'string'}, 'start_time': {'description': 'Start time of deployment (YYYY-MM-DD)', 'type': 'string'}, 'tests': {'items': {'$ref': '#/definitions/test'}, 'type': 'object'}, 'variable': {'description': &quot;Variable name. The same name used as a key in 'variable' object in CreatorConfig&quot;, 'type': 'string'}}, 'required': ['variable', 'bbox', 'start_time', 'end_time', 'tests'], 'title': 'QcVariableConfig', 'type': 'object'}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcVariableConfig"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcVariableConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Used to generate a QcConfig for a specific variable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path_or_dict</strong> – QcVariableConfig configuration, one of the following formats:
+python dict
+JSON filepath (str or Path object)</p></li>
+<li><p><strong>schema</strong> – JSON schema for QcVariable</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="ioos_qc.config_creator.config_creator.QcVariableConfig._validate_fx">
+<code class="sig-name descname">_validate_fx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_fx</span></em>, <em class="sig-param"><span class="n">test_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#QcVariableConfig._validate_fx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcVariableConfig._validate_fx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Thows exception if input_fx contains tokens not specifically allowed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_groupings">
+<code class="sig-name descname">allowed_groupings</code><em class="property"> = ['(', ')']</em><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_groupings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_operators">
+<code class="sig-name descname">allowed_operators</code><em class="property"> = ['+', '-', '*', '/']</em><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_operators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_stats">
+<code class="sig-name descname">allowed_stats</code><em class="property"> = ['min', 'max', 'mean', 'std']</em><a class="headerlink" href="#ioos_qc.config_creator.config_creator.QcVariableConfig.allowed_stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.config_creator.to_json">
+<code class="sig-prename descclassname">ioos_qc.config_creator.config_creator.</code><code class="sig-name descname">to_json</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">qc_config</span></em>, <em class="sig-param"><span class="n">out_file</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/config_creator.html#to_json"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.config_creator.to_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given qc_config return json</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-ioos_qc.config_creator.fx_parser">
+<span id="ioos-qc-config-creator-fx-parser-module"></span><h2>ioos_qc.config_creator.fx_parser module<a class="headerlink" href="#module-ioos_qc.config_creator.fx_parser" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="ioos_qc.config_creator.fx_parser.BNF">
+<code class="sig-prename descclassname">ioos_qc.config_creator.fx_parser.</code><code class="sig-name descname">BNF</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/fx_parser.html#BNF"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.fx_parser.BNF" title="Permalink to this definition">¶</a></dt>
+<dd><p>expop   :: ‘^’
+multop  :: ‘*’ | ‘/’
+addop   :: ‘+’ | ‘-‘
+integer :: [‘+’ | ‘-‘] ‘0’..’9’+
+atom    :: PI | E | real | fn ‘(‘ expr ‘)’ | ‘(‘ expr ‘)’
+factor  :: atom [ expop factor ]*
+term    :: factor [ multop factor ]*
+expr    :: term [ addop term ]*</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.fx_parser.eval_fx">
+<code class="sig-prename descclassname">ioos_qc.config_creator.fx_parser.</code><code class="sig-name descname">eval_fx</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fx</span></em>, <em class="sig-param"><span class="n">stats</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/fx_parser.html#eval_fx"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.fx_parser.eval_fx" title="Permalink to this definition">¶</a></dt>
+<dd><p>Given fx and stats (‘min’, ‘max’, ‘mean’, ‘std’) return the result</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.fx_parser.evaluate_stack">
+<code class="sig-prename descclassname">ioos_qc.config_creator.fx_parser.</code><code class="sig-name descname">evaluate_stack</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">s</span></em>, <em class="sig-param"><span class="n">stats</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/fx_parser.html#evaluate_stack"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.fx_parser.evaluate_stack" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.fx_parser.push_first">
+<code class="sig-prename descclassname">ioos_qc.config_creator.fx_parser.</code><code class="sig-name descname">push_first</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">toks</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/fx_parser.html#push_first"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.fx_parser.push_first" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.fx_parser.push_unary_minus">
+<code class="sig-prename descclassname">ioos_qc.config_creator.fx_parser.</code><code class="sig-name descname">push_unary_minus</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">toks</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/fx_parser.html#push_unary_minus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.fx_parser.push_unary_minus" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ioos_qc.config_creator.get_assets">
+<span id="ioos-qc-config-creator-get-assets-module"></span><h2>ioos_qc.config_creator.get_assets module<a class="headerlink" href="#module-ioos_qc.config_creator.get_assets" title="Permalink to this headline">¶</a></h2>
+<p>Download and process source data used for ConfigCreator</p>
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.get_narr">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">get_narr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#get_narr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.get_narr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.get_ocean_atlas">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">get_ocean_atlas</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#get_ocean_atlas"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.get_ocean_atlas" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.main">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">main</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">remove_tmp_files</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.narr_download">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">narr_download</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">sources</span><span class="o">=</span><span class="default_value">{'NARR': {'url': 'ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.derived/surface/{0}'}, 'OCEAN_ATLAS': {'other_url': 'https://data.nodc.noaa.gov/thredds/fileServer/ncei/woa/{0}/all/1.00/woa18_all_{1}{2:02d}_01.nc', 'ts_url': 'https://data.nodc.noaa.gov/thredds/fileServer/ncei/woa/{0}/A5B7/1.00/woa18_A5B7_{1}{2:02d}_01.nc'}}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#narr_download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.narr_download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.narr_enhance">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">narr_enhance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#narr_enhance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.narr_enhance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.narr_merge_variables">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">narr_merge_variables</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#narr_merge_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.narr_merge_variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.ocean_atlas_download">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">ocean_atlas_download</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">month</span></em>, <em class="sig-param"><span class="n">sources</span><span class="o">=</span><span class="default_value">{'NARR': {'url': 'ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.derived/surface/{0}'}, 'OCEAN_ATLAS': {'other_url': 'https://data.nodc.noaa.gov/thredds/fileServer/ncei/woa/{0}/all/1.00/woa18_all_{1}{2:02d}_01.nc', 'ts_url': 'https://data.nodc.noaa.gov/thredds/fileServer/ncei/woa/{0}/A5B7/1.00/woa18_A5B7_{1}{2:02d}_01.nc'}}</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#ocean_atlas_download"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.ocean_atlas_download" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.ocean_atlas_enhance">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">ocean_atlas_enhance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#ocean_atlas_enhance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.ocean_atlas_enhance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.ocean_atlas_merge_time">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">ocean_atlas_merge_time</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#ocean_atlas_merge_time"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.ocean_atlas_merge_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.ocean_atlas_merge_variables">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">ocean_atlas_merge_variables</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">month</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#ocean_atlas_merge_variables"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.ocean_atlas_merge_variables" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.ocean_atlas_variable_enhance">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">ocean_atlas_variable_enhance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">month</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#ocean_atlas_variable_enhance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.ocean_atlas_variable_enhance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt id="ioos_qc.config_creator.get_assets.remove_tmp_files">
+<code class="sig-prename descclassname">ioos_qc.config_creator.get_assets.</code><code class="sig-name descname">remove_tmp_files</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dirs_to_delete</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/ioos_qc/config_creator/get_assets.html#remove_tmp_files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ioos_qc.config_creator.get_assets.remove_tmp_files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-ioos_qc.config_creator.make_config">
+<span id="ioos-qc-config-creator-make-config-module"></span><h2>ioos_qc.config_creator.make_config module<a class="headerlink" href="#module-ioos_qc.config_creator.make_config" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">ioos_qc</a></h1>
+
+
+
+<p class="blurb">IOOS QARTOD and other Quality Control tests implemented in Python</p>
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ioos&repo=ioos_qc&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">IOOS QARTOD Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">Notebook Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../releases.html">IOOS QC Releases and Migration Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../development.html">Development and Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../other.html">Other QARTOD Implementations</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">ioos_qc</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="ioos_qc.html">ioos_qc package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="ioos_qc.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">ioos_qc.config_creator package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.argo">ioos_qc.argo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.config">ioos_qc.config module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.gliders">ioos_qc.gliders module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.plotting">ioos_qc.plotting module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.qartod">ioos_qc.qartod module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.results">ioos_qc.results module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.stores">ioos_qc.stores module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.streams">ioos_qc.streams module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ioos_qc.html#module-ioos_qc.utils">ioos_qc.utils module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">ioos_qc</a><ul>
+  <li><a href="ioos_qc.html">ioos_qc package</a><ul>
+      <li>Previous: <a href="ioos_qc.html" title="previous chapter">ioos_qc package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, IOOS.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
