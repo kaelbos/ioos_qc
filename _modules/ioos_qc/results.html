@@ -12,7 +12,6 @@
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
    
@@ -178,6 +177,9 @@
             <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">package</span><span class="p">][</span><span class="n">r</span><span class="o">.</span><span class="n">test</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span>
             <span class="k">continue</span>
 
+        <span class="n">flag_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">flag_arr</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QartodFlags</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span>
+
         <span class="c1"># iterate over the StreamConfigResults</span>
         <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
             <span class="n">testpackage</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">package</span>
@@ -185,12 +187,8 @@
             <span class="n">testresults</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">results</span>
 
             <span class="k">if</span> <span class="n">testname</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">stream_id</span><span class="p">][</span><span class="n">testpackage</span><span class="p">]:</span>
-                <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">stream_id</span><span class="p">][</span><span class="n">testpackage</span><span class="p">][</span><span class="n">testname</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
-                    <span class="n">QartodFlags</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span>
-                    <span class="n">index</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">,</span>
-                    <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span>
-                <span class="p">)</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">stream_id</span><span class="p">][</span><span class="n">testpackage</span><span class="p">][</span><span class="n">testname</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">testresults</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">stream_id</span><span class="p">][</span><span class="n">testpackage</span><span class="p">][</span><span class="n">testname</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">flag_arr</span><span class="p">)</span>
+            <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">stream_id</span><span class="p">][</span><span class="n">testpackage</span><span class="p">][</span><span class="n">testname</span><span class="p">][</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">testresults</span>
 
     <span class="k">return</span> <span class="n">collected</span></div>
 </pre></div>
@@ -268,7 +266,7 @@
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.3.1</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.0</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
