@@ -148,8 +148,8 @@
 
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
-        <span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+        <span class="n">lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lon</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">lon</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">lat</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -215,7 +215,7 @@
 
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -463,8 +463,8 @@
     <span class="n">tinp</span> <span class="o">=</span> <span class="n">mapdates</span><span class="p">(</span><span class="n">tinp</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
-        <span class="n">zinp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">zinp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+        <span class="n">zinp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">zinp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -507,7 +507,7 @@
 
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -569,7 +569,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -627,7 +627,7 @@
     <span class="c1"># input as numpy arr</span>
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -744,7 +744,7 @@
     <span class="n">tinp</span> <span class="o">=</span> <span class="n">mapdates</span><span class="p">(</span><span class="n">tinp</span><span class="p">)</span>
     <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
         <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
-        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
 
     <span class="c1"># Save original shape</span>
     <span class="n">original_shape</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span>
@@ -775,6 +775,77 @@
     <span class="n">flag_arr</span><span class="p">[</span><span class="n">inp</span><span class="o">.</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">MISSING</span>
 
     <span class="k">return</span> <span class="n">flag_arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">original_shape</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="density_inversion_test"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.qartod.density_inversion_test">[docs]</a><span class="nd">@add_flag_metadata</span><span class="p">(</span><span class="n">standard_name</span><span class="o">=</span><span class="s1">&#39;density_inversion_test_flag&#39;</span><span class="p">,</span>
+                   <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;Density Inversion Test Flag&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">density_inversion_test</span><span class="p">(</span><span class="n">inp</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
+                           <span class="n">zinp</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">N</span><span class="p">],</span>
+                           <span class="n">suspect_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                           <span class="n">fail_threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="kc">None</span>
+                           <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">MaskedArray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    With few exceptions, potential water density will increase with increasing pressure. When</span>
+<span class="sd">    vertical profile data is obtained, this test is used to flag as failed T, C, and SP observations, which</span>
+<span class="sd">    yield densities that do not sufficiently increase with pressure. A small operator-selected density</span>
+<span class="sd">    threshold (DT) allows for micro-turbulent exceptions. This test can be run on downcasts, upcasts,</span>
+<span class="sd">    or down/up cast results produced in real time.</span>
+
+<span class="sd">    Both Temperature and Salinity should be flagged based on the result of this test.</span>
+
+<span class="sd">    Ref: Manual for Real-Time Quality Control of in-situ Temperature and Salinity Data, Version 2.0, January 2016</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        inp: Potential density values as a numeric numpy array or a list of numbers.</span>
+<span class="sd">        zinp: Corresponding depth/pressure values for each density.</span>
+<span class="sd">        suspect_threshold: A float value representing a maximum potential density(or sigma0)</span>
+<span class="sd">            variation to be tolerated, downward density variation exceeding this will be flagged as SUSPECT.</span>
+<span class="sd">        fail_threshold:  A float value representing a maximum potential density(or sigma0)</span>
+<span class="sd">            variation to be tolerated, downward density variation exceeding this will be flagged as FAIL.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        A masked array of flag values equal in size to that of the input.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+        <span class="n">inp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+        <span class="n">zinp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_invalid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">zinp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">))</span>
+
+    <span class="c1"># Make sure both inputs are the same size.</span>
+    <span class="k">if</span> <span class="n">inp</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">zinp</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Density (</span><span class="si">{</span><span class="n">inp</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">) and depth (</span><span class="si">{</span><span class="n">zinp</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">) must be the same shape&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Start with everything as passing</span>
+    <span class="n">flag_arr</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">GOOD</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">inp</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+
+    <span class="c1"># If no data or just one record, return respectively an empty mask array or UNKNOWN</span>
+    <span class="k">if</span> <span class="n">inp</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_array</span><span class="p">([])</span>
+    <span class="k">if</span> <span class="n">inp</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">flag_arr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">UNKNOWN</span>
+        <span class="k">return</span> <span class="n">flag_arr</span>
+
+    <span class="c1"># Compute the vertical density variability along zinp and flip delta according to zinp variation direction</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">zinp</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">inp</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">suspect_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+            <span class="n">is_suspect</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="n">suspect_threshold</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">is_suspect</span><span class="p">):</span>
+                <span class="n">flag_arr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">is_suspect</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">SUSPECT</span>  <span class="c1"># Previous value</span>
+                <span class="n">flag_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:][</span><span class="n">is_suspect</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">SUSPECT</span>  <span class="c1"># Reversed value</span>
+
+    <span class="k">if</span> <span class="n">fail_threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">np</span><span class="o">.</span><span class="n">errstate</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">):</span>
+            <span class="n">is_fail</span> <span class="o">=</span> <span class="n">delta</span> <span class="o">&lt;</span> <span class="n">fail_threshold</span>
+            <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">is_fail</span><span class="p">):</span>
+                <span class="n">flag_arr</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="n">is_fail</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">FAIL</span>  <span class="c1"># Previous value</span>
+                <span class="n">flag_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:][</span><span class="n">is_fail</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">FAIL</span>  <span class="c1"># Reversed Value</span>
+
+    <span class="c1"># If the value or depth is masked set the flag to MISSING for this record and the following one.</span>
+    <span class="n">is_missing</span> <span class="o">=</span> <span class="n">inp</span><span class="o">.</span><span class="n">mask</span> <span class="o">|</span> <span class="n">zinp</span><span class="o">.</span><span class="n">mask</span>
+    <span class="n">flag_arr</span><span class="p">[</span><span class="n">is_missing</span><span class="p">]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">MISSING</span>
+    <span class="n">flag_arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:][</span><span class="n">is_missing</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">QartodFlags</span><span class="o">.</span><span class="n">MISSING</span>
+    <span class="k">return</span> <span class="n">flag_arr</span></div>
 </pre></div>
 
           </div>
@@ -850,7 +921,7 @@
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.0</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
