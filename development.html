@@ -4,11 +4,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Development and Testing &#8212; ioos_qc 1.0.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -32,9 +33,9 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="development-and-testing">
+  <section id="development-and-testing">
 <h1>Development and Testing<a class="headerlink" href="#development-and-testing" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="environment-setup">
+<section id="environment-setup">
 <h2>Environment setup<a class="headerlink" href="#environment-setup" title="Permalink to this headline">¶</a></h2>
 <p>Create a conda environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">ioosqc38</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.8</span>
@@ -46,8 +47,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pytest</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="docs">
+</section>
+<section id="docs">
 <h2>Docs<a class="headerlink" href="#docs" title="Permalink to this headline">¶</a></h2>
 <p>Build docs:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">y</span> <span class="o">-</span><span class="n">n</span> <span class="n">ioosqc37_docs</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.7</span>
@@ -70,8 +71,8 @@
 </div>
 <p><em>Note:</em> If you add or edit the notebook examples, you should save the result with the <em>output cleared on all cells</em>.
 This way, <code class="docutils literal notranslate"><span class="pre">nbsphinx</span></code> will build the notebook output during the build stage.</p>
-</div>
-<div class="section" id="releasing">
+</section>
+<section id="releasing">
 <h2>Releasing<a class="headerlink" href="#releasing" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Update the version numbers in the repo</p></li>
@@ -97,8 +98,8 @@ This way, <code class="docutils literal notranslate"><span class="pre">nbsphinx<
 <li><p>Fork <a class="reference external" href="https://github.com/conda-forge/ioos_qc-feedstock">https://github.com/conda-forge/ioos_qc-feedstock</a> and follow the instructions</p></li>
 </ul>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 
           </div>
@@ -179,7 +180,7 @@ This way, <code class="docutils literal notranslate"><span class="pre">nbsphinx<
       &copy;2017, IOOS.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.4.3</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
