@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ioos_qc.results &#8212; ioos_qc 1.0.0 documentation</title>
+    <title>ioos_qc.results &#8212; ioos_qc 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css" />
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
@@ -33,6 +33,7 @@
   <h1>Source code for ioos_qc.results</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># coding=utf-8</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">List</span>
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">odict</span><span class="p">,</span> <span class="n">defaultdict</span>
@@ -41,20 +42,22 @@
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">ioos_qc.qartod</span> <span class="kn">import</span> <span class="n">QartodFlags</span>
 
+<span class="n">L</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># noqa</span>
 
-<div class="viewcode-block" id="StreamConfigResult"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.results.StreamConfigResult">[docs]</a><span class="k">class</span> <span class="nc">StreamConfigResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CallResult"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.results.CallResult">[docs]</a><span class="k">class</span> <span class="nc">CallResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">package</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">test</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">function</span><span class="p">:</span> <span class="n">callable</span>
     <span class="n">results</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;CollectedResult package=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="si">}</span><span class="s1"> test=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="si">}</span><span class="s1">&gt;&#39;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;&lt;CallResult package=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="si">}</span><span class="s1"> test=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="si">}</span><span class="s1">&gt;&#39;</span></div>
 
 
 <div class="viewcode-block" id="ContextResult"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.results.ContextResult">[docs]</a><span class="k">class</span> <span class="nc">ContextResult</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">stream_id</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">StreamConfigResult</span><span class="p">]</span>
+    <span class="n">results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CallResult</span><span class="p">]</span>
     <span class="n">subset_indexes</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">tinp</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="kc">None</span>
@@ -87,7 +90,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">hash_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_id</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="si">}</span><span class="s1">&#39;</span></div>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_id</span><span class="si">}</span><span class="s1">:</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">package</span><span class="si">}</span><span class="s1">.</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">test</span><span class="si">}</span><span class="s1">&#39;</span></div>
 
 
 <div class="viewcode-block" id="collect_results"><a class="viewcode-back" href="../../api/ioos_qc.html#ioos_qc.results.collect_results">[docs]</a><span class="k">def</span> <span class="nf">collect_results</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">):</span>
@@ -107,9 +110,10 @@
     <span class="c1"># ContextResults</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
 
-        <span class="c1"># Shortcut for StreamConfigResult objects when someone uses QcConfig.run() directly</span>
+        <span class="n">cr</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="c1"># Shortcut for CallResult objects when someone uses QcConfig.run() directly</span>
         <span class="c1"># and doesn&#39;t go through a Stream object</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">StreamConfigResult</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">CallResult</span><span class="p">):</span>
             <span class="n">cr</span> <span class="o">=</span> <span class="n">CollectedResult</span><span class="p">(</span>
                 <span class="n">stream_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">package</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">package</span><span class="p">,</span>
@@ -120,7 +124,7 @@
             <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cr</span>
             <span class="k">continue</span>
 
-        <span class="c1"># StreamConfigResults</span>
+        <span class="c1"># CallResults</span>
         <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
 
             <span class="n">cr</span> <span class="o">=</span> <span class="n">CollectedResult</span><span class="p">(</span>
@@ -132,7 +136,7 @@
 
             <span class="k">if</span> <span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collected</span><span class="p">:</span>
                 <span class="c1"># Set the initial values</span>
-                <span class="n">cr</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+                <span class="n">cr</span><span class="o">.</span><span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tr</span><span class="o">.</span><span class="n">results</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
                 <span class="n">cr</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
                 <span class="n">cr</span><span class="o">.</span><span class="n">tinp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">tinp</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
                 <span class="n">cr</span><span class="o">.</span><span class="n">zinp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_all</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">r</span><span class="o">.</span><span class="n">zinp</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
@@ -142,18 +146,19 @@
 
             <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">results</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">results</span>
 
-        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">tinp</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">tinp</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">zinp</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">zinp</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lat</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lon</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">tinp</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">tinp</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">zinp</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">zinp</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lat</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lat</span>
-            <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lon</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lon</span>
+        <span class="k">if</span> <span class="n">cr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">tinp</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">tinp</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">zinp</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">zinp</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lat</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lon</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lon</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">data</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">tinp</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">tinp</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">zinp</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">zinp</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lat</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lat</span>
+                <span class="n">collected</span><span class="p">[</span><span class="n">cr</span><span class="o">.</span><span class="n">hash_key</span><span class="p">]</span><span class="o">.</span><span class="n">lon</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">lon</span>
 
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">collected</span><span class="o">.</span><span class="n">values</span><span class="p">())</span></div>
 
@@ -171,16 +176,16 @@
     <span class="c1"># ContextResults</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
 
-        <span class="c1"># Shortcut for StreamConfigResult objects when someone uses QcConfig.run() directly</span>
+        <span class="c1"># Shortcut for CallResult objects when someone uses QcConfig.run() directly</span>
         <span class="c1"># and doesn&#39;t go through a Stream object</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">StreamConfigResult</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">CallResult</span><span class="p">):</span>
             <span class="n">collected</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">package</span><span class="p">][</span><span class="n">r</span><span class="o">.</span><span class="n">test</span><span class="p">]</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span>
             <span class="k">continue</span>
 
         <span class="n">flag_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">subset_indexes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
         <span class="n">flag_arr</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QartodFlags</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span>
 
-        <span class="c1"># iterate over the StreamConfigResults</span>
+        <span class="c1"># iterate over the CallResults</span>
         <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">r</span><span class="o">.</span><span class="n">results</span><span class="p">:</span>
             <span class="n">testpackage</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">package</span>
             <span class="n">testname</span> <span class="o">=</span> <span class="n">tr</span><span class="o">.</span><span class="n">test</span>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>IOOS QC Releases and Migration Guide &#8212; ioos_qc 1.0.0 documentation</title>
+    <title>IOOS QC Releases and Migration Guide &#8212; ioos_qc 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -35,6 +35,33 @@
             
   <section id="ioos-qc-releases-and-migration-guide">
 <h1>IOOS QC Releases and Migration Guide<a class="headerlink" href="#ioos-qc-releases-and-migration-guide" title="Permalink to this headline">¶</a></h1>
+<section id="june-2021">
+<h2>2.0.0 (June 2021)<a class="headerlink" href="#june-2021" title="Permalink to this headline">¶</a></h2>
+<p>As of this release, backwards compatibility with <code class="docutils literal notranslate"><span class="pre">1.0.0</span></code> has been broken for the <code class="docutils literal notranslate"><span class="pre">QcConfig</span></code> and <code class="docutils literal notranslate"><span class="pre">NcQcConfig</span></code> (they no longer exist). Look at the documentation for the new <code class="docutils literal notranslate"><span class="pre">Config</span></code> objects. The basic test interface and functionality did not change with this release and if you were not using any of the internal complex objects you should be safe to upgrade. Of course please test your own implementations first.</p>
+<p>Special thanks to &#64;jessicaaustin, &#64;JessyBarette, &#64;yosoyjay, and &#64;eldobbins for reviewing code, improving documentation, and submitting issues and pull requests.</p>
+<p>Changes from <strong>1.0.0</strong>:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Core</dt><dd><ul>
+<li><p><a class="reference external" href="https://github.com/ioos/ioos_qc/pull/39">Added</a> the concepts of <code class="docutils literal notranslate"><span class="pre">Config</span></code>, <code class="docutils literal notranslate"><span class="pre">Streams</span></code>, and <code class="docutils literal notranslate"><span class="pre">Stores</span></code>, see usage documentation for details.</p></li>
+<li><p><a class="reference external" href="https://github.com/ioos/ioos_qc/pull/39/commits/be7d1daf02791fc7a9443b80ac9f4a91f0578e63">Added</a> ability to generate Config objects based on climatologies</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Tests</dt><dd><ul>
+<li><p>Added a <a class="reference external" href="https://github.com/ioos/ioos_qc/pull/42">Density Inversion</a> test</p></li>
+<li><p>Attenuated signal test <a class="reference external" href="https://github.com/ioos/ioos_qc/pull/32">was reworked</a></p></li>
+<li><p><a class="reference external" href="https://github.com/ioos/ioos_qc/pull/34">Bug fix</a> in spike test</p></li>
+<li><p>Added the <code class="docutils literal notranslate"><span class="pre">argo</span></code> module including speed and pressure tests</p></li>
+<li><p>Improved documentation and notebook examples</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
 <section id="march-2020">
 <h2>1.0.0 (March 2020)<a class="headerlink" href="#march-2020" title="Permalink to this headline">¶</a></h2>
 <p>As of this release, all of the existing tests in the QARTOD API should be stable.</p>
@@ -87,8 +114,8 @@ improving documentation, and submitting issues and pull requests.</p>
 <li><p>Bugfix: flat line test handles short <code class="code docutils literal notranslate"><span class="pre">inp</span></code></p></li>
 </ul>
 </section>
-<section id="id6">
-<h2>0.2.0 (Sept 9, 2019)<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<section id="id7">
+<h2>0.2.0 (Sept 9, 2019)<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Flat line test rewrite</dt><dd><ul>
@@ -212,9 +239,10 @@ improving documentation, and submitting issues and pull requests.</p>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">IOOS QARTOD Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Notebook Examples</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">IOOS QC Releases and Migration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#june-2021">2.0.0 (June 2021)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#march-2020">1.0.0 (March 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sept-9-2019">0.2.1 (Sept 9, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">0.2.0 (Sept 9, 2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">0.2.0 (Sept 9, 2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#feb-18-2019">0.1.1 (Feb 18, 2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#feb-8-2019">0.1.0 (Feb 8, 2019)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#migrating-from-0-0-3-to-0-1-0">Migrating from 0.0.3 to 0.1.0</a></li>

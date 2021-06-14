@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>IOOS QC: QARTOD and other Quality Control tests implemented in Python &#8212; ioos_qc 1.0.0 documentation</title>
+    <title>IOOS QC: QARTOD and other Quality Control tests implemented in Python &#8212; ioos_qc 2.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
@@ -56,8 +56,8 @@ observing systems.</p>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#results">Results</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#numpystream">NumpyStream</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#pandasstream">PandasStream</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#netcdfstream">NetcdfStream</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#xarraystream">XarrayStream</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#netcdfstream">NetcdfStream</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#stores">Stores</a><ul>
@@ -65,9 +65,9 @@ observing systems.</p>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#cfnetcdfstore">CFNetCDFStore</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#qcconfigcreator">QcConfigCreator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#configgeneration">ConfigGeneration</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#creatorconfig">CreatorConfig</a></li>
-<li class="toctree-l3"><a class="reference internal" href="usage.html#id6">QcConfigCreator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#qcconfigcreator">QcConfigCreator</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#qcvariableconfig">QcVariableConfig</a></li>
 <li class="toctree-l3"><a class="reference internal" href="usage.html#create-config-for-qcconfig">Create config for QcConfig</a></li>
 </ul>
@@ -77,9 +77,10 @@ observing systems.</p>
 <li class="toctree-l1"><a class="reference internal" href="resources.html">IOOS QARTOD Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">Notebook Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="releases.html">IOOS QC Releases and Migration Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="releases.html#june-2021">2.0.0 (June 2021)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="releases.html#march-2020">1.0.0 (March 2020)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="releases.html#sept-9-2019">0.2.1 (Sept 9, 2019)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="releases.html#id6">0.2.0 (Sept 9, 2019)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="releases.html#id7">0.2.0 (Sept 9, 2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="releases.html#feb-18-2019">0.1.1 (Feb 18, 2019)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="releases.html#feb-8-2019">0.1.0 (Feb 8, 2019)</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="releases.html#migrating-from-0-0-3-to-0-1-0">Migrating from 0.0.3 to 0.1.0</a></li>
@@ -110,6 +111,7 @@ observing systems.</p>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.argo">ioos_qc.argo module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.axds">ioos_qc.axds module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.config">ioos_qc.config module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.gliders">ioos_qc.gliders module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="api/ioos_qc.html#module-ioos_qc.plotting">ioos_qc.plotting module</a></li>

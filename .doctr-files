@@ -1,9 +1,9 @@
 ./_modules/index.html
 ./_modules/ioos_qc/argo.html
+./_modules/ioos_qc/axds.html
 ./_modules/ioos_qc/config.html
 ./_modules/ioos_qc/config_creator/config_creator.html
 ./_modules/ioos_qc/config_creator/fx_parser.html
-./_modules/ioos_qc/config_creator/get_assets.html
 ./_modules/ioos_qc/gliders.html
 ./_modules/ioos_qc/plotting.html
 ./_modules/ioos_qc/qartod.html
