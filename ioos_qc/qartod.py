@@ -576,7 +576,7 @@ def rate_of_change_test(inp : Sequence[N],
     roc = np.ma.zeros(inp.size, dtype='float')
 
     tinp = mapdates(tinp).flatten()
-    roc[1:] = np.abs(np.diff(inp) / np.diff(tinp).astype('timedelta64[s]').astype(float))
+    roc[1:] = np.abs(np.diff(inp) / (np.diff(tinp).astype('timedelta64[ns]').astype(float)) / 1e9)
 
     with np.errstate(invalid='ignore'):
         flag_arr[roc > threshold] = QartodFlags.SUSPECT
@@ -750,7 +750,7 @@ def attenuated_signal_test(inp : Sequence[N],
         if min_obs is not None:
             min_periods = min_obs
         elif min_period is not None:
-            time_interval = np.median(np.diff(tinp)).astype('timedelta64[s]').astype(float)
+            time_interval = np.median(np.diff(tinp)).astype('timedelta64[ns]').astype(float) / 1e9
             min_periods = (min_period / time_interval).astype(int)
         else:
             min_periods = None
