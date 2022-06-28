@@ -637,8 +637,8 @@ def flat_line_test(inp: Sequence[N],
     # determine median time interval
     tinp = mapdates(tinp).flatten()
 
-    # The thresholds are in seconds so we round make sure the interval is also in seconds
-    time_interval = np.median(np.diff(tinp)).astype('timedelta64[s]').astype(float)
+    # The thresholds are in seconds so we make sure the interval is also in seconds
+    time_interval = np.median(np.diff(tinp)).astype('timedelta64[ns]').astype(float) / 1e9
 
     def rolling_window(a, window):
         """
